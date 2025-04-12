@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azka.Rafif</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Animations */
+        @keyframes circleFill {
+            0% {
+                clip-path: circle(0% at 50% 50%);
+            }
+            100% {
+                clip-path: var(--final-clip);
+            }
+        }
+        
+        @keyframes barFill {
+            from {
+                width: 0;
+            }
+            to {
+                width: var(--final-width);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .skill-progress {
+            position: relative;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background-color: rgba(217, 217, 217, 0.125);
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #0099FF;
+            transform: rotate(-90deg);
+            transform-origin: center;
+            animation: circleFill 1.5s ease-out forwards;
+        }
+        
+        .progress-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.875rem;
+            z-index: 10;
+        }
+        
+        .design-progress-container {
+            width: 100%;
+            max-width: 300px;
+            height: 10px;
+            background-color: rgba(217, 217, 217, 0.125);
+            border-radius: 9999px;
+            overflow: hidden;
+            margin: 0 0 15px 0;
+        }
+        
+        .design-progress-bar {
+            height: 100%;
+            background-color: #0099FF;
+            border-radius: 9999px;
+            animation: barFill 1.5s ease-out forwards;
+        }
+        
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 153, 255, 0.2);
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 1s ease-out forwards;
+        }
+        
+        .delay-100 {
+            animation-delay: 0.1s;
+        }
+        
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-300 {
+            animation-delay: 0.3s;
+        }
+        
+        .delay-400 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-500 {
+            animation-delay: 0.5s;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 120px;
+            left: 0;
+            right: 0;
+            background-color: rgba(30, 30, 30, 0.95);
+            padding: 20px;
+            z-index: 100;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 1024px) {
+            .hamburger {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-[#1e1e1e] scroll-smooth">
+    <!-- Navigation -->
+    <header class="fixed w-full z-50 backdrop-blur-xl bg-[#1e1e1e10]">
+        <div class="h-[120px] w-full flex justify-between items-center px-6 md:px-[45px] py-[45px]">
+            <h1 class="text-[24px] font-bold text-[#0099FF] animate-fade-in">Azka.Rafif</h1>
+            
+            <div class="hamburger text-white text-2xl md:hidden">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <nav class="hidden md:block">
+                <ul class="flex gap-6 lg:gap-10">
+                    <li><a href="#home" class="text-[15px] text-white font-bold hover:text-[#0099FF] transition-colors duration-300 animate-fade-in delay-100">home</a></li>
+                    <li><a href="#about-me" class="text-[15px] text-white font-bold hover:text-[#0099FF] transition-colors duration-300 animate-fade-in delay-200">about me</a></li>
+                    <li><a href="#skills" class="text-[15px] text-white font-bold hover:text-[#0099FF] transition-colors duration-300 animate-fade-in delay-300">skills</a></li>
+                    <li><a href="#education" class="text-[15px] text-white font-bold hover:text-[#0099FF] transition-colors duration-300 animate-fade-in delay-400">Educations</a></li>
+                    <li><a href="#portofolio" class="text-[15px] text-white font-bold hover:text-[#0099FF] transition-colors duration-300 animate-fade-in delay-500">Portofolio</a></li>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <a href="#home" class="text-[15px] py-2 text-white font-bold hover:text-[#0099FF] transition-colors duration-300">home</a>
+            <a href="#about-me" class="text-[15px] py-2 text-white font-bold hover:text-[#0099FF] transition-colors duration-300">about me</a>
+            <a href="#skills" class="text-[15px] py-2 text-white font-bold hover:text-[#0099FF] transition-colors duration-300">skills</a>
+            <a href="#education" class="text-[15px] py-2 text-white font-bold hover:text-[#0099FF] transition-colors duration-300">Educations</a>
+            <a href="#portofolio" class="text-[15px] py-2 text-white font-bold hover:text-[#0099FF] transition-colors duration-300">Portofolio</a>
+            <a href="#contact" class="text-[15px] py-2 text-white font-bold hover:text-[#0099FF] transition-colors duration-300">contact</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen w-full bg-cover bg-[url('../img/motor.png')] pt-[120px]">
+        <div class="absolute inset-0 backdrop-blur-sm bg-[#1e1e1e10]"></div>
+        <div class="relative h-full flex flex-col lg:h-[70vh] lg:flex-row items-center justify-center lg:justify-between px-6 md:px-[5%] gap-10 z-10">
+            <div class="animate-fade-in-up text-center lg:text-left mt-10 lg:mt-0">
+                <h3 class="text-[40px] md:text-[60px] lg:text-[70px] text-white font-bold">Hello</h3>
+                <h3 class="text-[40px] md:text-[60px] lg:text-[70px] text-[#0099FF] font-bold">Azka Rafif Andyra</h3>
+                <h3 class="text-[16px] text-white font-normal max-w-[500px] mx-auto lg:mx-0">
+                    seorang pengembang front-end seluler dan UI & UX design.
+                </h3>
+            </div>
+            <img src="img/aww.png" class="w-full max-w-[400px] lg:w-[40%] h-auto animate-fade-in delay-300" alt="Azka Rafif Andyra">
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about-me" class="py-[45px] px-6 md:px-[45px] mx-auto flex items-center">
+        <div class="flex flex-col items-center justify-center w-full h-auto">
+            <h1 class="text-[32px] text-white font-semibold mb-6 text-center animate-fade-in-up">About Me</h1>
+
+            <div class="flex flex-col lg:flex-row items-center gap-10 w-full px-0 md:px-[10%]">
+                <div class="w-full lg:w-1/2 flex justify-center animate-fade-in-up delay-100">
+                    <img src="img/bulat.png" class="w-[250px] md:w-[358.96px] h-[200px] md:h-[287.31px] object-contain" alt="Azka Rafif Andyra">
+                </div>
+
+                <div class="w-full lg:w-1/2 animate-fade-in-up delay-200 text-center lg:text-left">
+                    <p class="text-white text-[16px] mb-6 font-regular">
+                        Halo Saya Azka, saya lahir di Depok 23 September 2008. Saya seorang pengembang front-end seluler
+                        dan UI & UX design.
+                        Saya memiliki pengalaman tingkat menengah dan saya berharap dengan ini saya dapat selalu
+                        mempelajari sesuatu yang baru
+                        untuk menciptakan website yang menarik serta aplikasi digital yang dapat membantu banyak orang
+                        di masa mendatang.
+                        Dapat bekerja secara mandiri atau dalam tim.
+                    </p>
+                    <a href="img/Azka Rafif CV .jpeg" download
+                        class="px-6 py-3 bg-[#0099FF] text-white font-bold rounded-lg shadow-md hover:bg-[#005acc] transition duration-300 inline-block">
+                        Download CV
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-[45px] px-6 md:px-[45px]">
+        <div class="flex flex-col items-center justify-center w-full h-auto">
+            <h1 class="text-[32px] text-white font-semibold mb-6 text-center animate-fade-in-up">Skills</h1>
+        </div>
+        <div class="px-0 md:px-[10%]">
+            <h3 class="text-[#0099FF] text-[20px] font-semibold animate-fade-in-up delay-100">
+                </>Tech Stack</h3>
+
+            <!-- First Row of Skills -->
+            <div class="py-[45px] gap-6 md:gap-[30px] lg:gap-[100px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 items-center justify-center">
+                <!-- HTML -->
+                <div class="bg-[#D9D9D910] w-full h-[256px] rounded-xl flex flex-col items-center animate-fade-in-up delay-200">
+                    <h3 class="py-[15px] font-semibold text-[16px] text-[#0099FF]">HTML</h3>
+                    <img src="img/html.png" class="w-[100px] md:w-[150px] h-[60px] md:h-[80px] px-[15px] md:px-[25px]" alt="HTML Logo">
+                    <div class="skill-progress mt-[30px]">
+                        <div class="progress-fill" style="--final-clip: circle(50% at 50% 50%);" data-percent="100"></div>
+                        <span class="progress-text">100%</span>
+                    </div>
+                </div>
+
+                <!-- CSS -->
+                <div class="bg-[#D9D9D910] w-full h-[256px] rounded-xl flex flex-col items-center animate-fade-in-up delay-300">
+                    <h3 class="py-[15px] font-semibold text-[16px] text-[#0099FF]">CSS</h3>
+                    <img src="img/css.png" class="w-[80px] md:w-[105px] h-[70px] md:h-[90px] mx-[15px] md:mx-[21px]" alt="CSS Logo">
+                    <div class="skill-progress mt-[20px]">
+                        <div class="progress-fill" style="--final-clip: circle(50% at 50% 50%);" data-percent="100"></div>
+                        <span class="progress-text">100%</span>
+                    </div>
+                </div>
+
+                <!-- Tailwind CSS -->
+                <div class="bg-[#D9D9D910] w-full h-[256px] rounded-xl flex flex-col items-center animate-fade-in-up delay-400">
+                    <h3 class="py-[15px] font-semibold text-[16px] text-[#0099FF]">Tailwind CSS</h3>
+                    <img src="img/talwind.png" class="w-[70px] md:w-[86px] h-[45px] md:h-[55px] mx-[20px] md:mx-[30px] mt-[15px] md:mt-[20px]" alt="Tailwind CSS Logo">
+                    <div class="skill-progress mt-[25px] md:mt-[35px]">
+                        <div class="progress-fill" style="--final-clip: circle(50% at 50% 50%);" data-percent="100"></div>
+                        <span class="progress-text">100%</span>
+                    </div>
+                </div>
+
+                <!-- JavaScript -->
+                <div class="bg-[#D9D9D910] w-full h-[256px] rounded-xl flex flex-col items-center animate-fade-in-up delay-500">
+                    <h3 class="py-[15px] font-semibold text-[16px] text-[#0099FF]">JavaScript</h3>
+                    <img src="img/js.png" class="w-[120px] md:w-[150px] h-[70px] md:h-[90px]" alt="JavaScript Logo">
+                    <div class="skill-progress mt-[20px]">
+                        <div class="progress-fill" style="--final-clip: circle(37.5% at 50% 50%);" data-percent="75"></div>
+                        <span class="progress-text">75%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second Row of Skills -->
+            <div class="py-[45px] gap-6 md:gap-[30px] lg:gap-[100px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center justify-center">
+                <!-- Laravel -->
+                <div class="bg-[#D9D9D910] w-full h-[256px] rounded-xl flex flex-col items-center animate-fade-in-up delay-200">
+                    <h3 class="py-[15px] font-semibold text-[16px] text-[#0099FF]">Laravel</h3>
+                    <img src="img/Laravel.png" class="w-[70px] md:w-[80px] h-[70px] md:h-[80px] mx-[25px] md:mx-[33px]" alt="Laravel Logo">
+                    <div class="skill-progress mt-[20px]">
+                        <div class="progress-fill" style="--final-clip: circle(37.5% at 50% 50%);" data-percent="75"></div>
+                        <span class="progress-text">75%</span>
+                    </div>
+                </div>
+
+                <!-- React JS -->
+                <div class="bg-[#D9D9D910] w-full h-[256px] rounded-xl flex flex-col items-center animate-fade-in-up delay-300">
+                    <h3 class="py-[15px] font-semibold text-[16px] text-[#0099FF]">React JS</h3>
+                    <img src="img/reactjs.png" class="w-[70px] md:w-[80px] h-[70px] md:h-[80px] mx-[25px] md:mx-[33px]" alt="React JS Logo">
+                    <div class="skill-progress mt-[20px]">
+                        <div class="progress-fill" style="--final-clip: circle(15% at 50% 50%);" data-percent="30"></div>
+                        <span class="progress-text">30%</span>
+                    </div>
+                </div>
+
+                <!-- Python -->
+                <div class="bg-[#D9D9D910] w-full h-[256px] rounded-xl flex flex-col items-center animate-fade-in-up delay-400">
+                    <h3 class="py-[15px] font-semibold text-[16px] text-[#0099FF]">Python</h3>
+                    <img src="img/pythoned.png" class="w-[70px] md:w-[80px] h-[70px] md:h-[80px] mx-[25px] md:mx-[33px]" alt="Python Logo">
+                    <div class="skill-progress mt-[20px]">
+                        <div class="progress-fill" style="--final-clip: circle(15% at 50% 50%);" data-percent="30"></div>
+                        <span class="progress-text">30%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Design Skills Section -->
+            <h3 class="text-[#0099FF] text-[20px] font-semibold mt-10 animate-fade-in-up delay-100">Design</h3>
+
+            <!-- Figma -->
+            <div class="flex justify-center items-center py-[30px] md:py-[45px] animate-fade-in-up delay-200">
+                <div class="bg-[#D9D9D910] w-full md:w-[80%] lg:w-[60%] h-auto flex flex-col items-center justify-center rounded-xl p-6">
+                    <h3 class="py-[15px] font-semibold text-[16px] text-[#0099FF]">Figma</h3>
+                    <img src="img/figma.png" class="w-[60px] h-[60px] mb-[15px]" alt="Figma Logo">
+                    <div class="w-full flex flex-col items-center">
+                        <div class="design-progress-container">
+                            <div class="design-progress-bar" style="--final-width: 80%;" data-percent="80"></div>
+                        </div>
+                        <span class="text-white font-bold text-sm">80%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Canva -->
+            <div class="flex justify-center items-center py-[30px] md:py-[45px] animate-fade-in-up delay-300">
+                <div class="bg-[#D9D9D910] w-full md:w-[80%] lg:w-[60%] h-auto flex flex-col items-center justify-center rounded-xl p-6">
+                    <h3 class="py-[15px] font-semibold text-[16px] text-[#0099FF]">Canva</h3>
+                    <img src="img/canva.png" class="w-[50px] h-[50px] mb-[15px]" alt="Canva Logo">
+                    <div class="w-full flex flex-col items-center">
+                        <div class="design-progress-container">
+                            <div class="design-progress-bar" style="--final-width: 90%;" data-percent="90"></div>
+                        </div>
+                        <span class="text-white font-bold text-sm">90%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-[45px] bg-[#0099FF] animate-fade-in">
+        <h1 class="text-[#272727] text-[32px] font-semibold flex justify-center items-center animate-fade-in-up">Education</h1>
+        <div class="flex flex-col lg:flex-row justify-center items-start gap-10 lg:gap-[50px] xl:gap-[200px] py-[45px] px-6 md:px-[5%]">
+            <div class="bg-[#272727] w-full lg:w-[30%] h-auto rounded-xl p-6 animate-fade-in-up delay-100">
+                <h2 class="text-[#0099FF] text-[16px] font-semibold py-6 flex justify-center items-center">School</h2>
+                <div class="relative pl-[15px] md:pl-[25px]">
+                    <div class="mb-6">
+                        <span class="text-gray-400 text-sm">2016 - 2021</span>
+                        <h3 class="text-white text-[16px] md:text-[18px] font-semibold">SDIT Al Hikmah</h3>
+                    </div>
+                    <div class="mb-6">
+                        <span class="text-gray-400 text-sm">2021 - 2024</span>
+                        <h3 class="text-white text-[16px] md:text-[18px] font-semibold">SMPIT Darul Quran Mulia</h3>
+                    </div>
+                    <div class="mb-6">
+                        <span class="text-gray-400 text-sm">2024 - Sekarang</span>
+                        <h3 class="text-white text-[16px] md:text-[18px] font-semibold">SMK Madinatul Quran</h3>
+                        <p class="text-gray-400 text-[10px]">Software Engineer (RPL)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-[#272727] w-full lg:w-[30%] h-auto rounded-xl flex flex-col p-6 animate-fade-in-up delay-200">
+                <h3 class="text-[16px] font-bold text-[#0099FF] mb-6 flex justify-center items-center">Online Classes</h3>
+                <div class="grid grid-cols-2 gap-4 place-items-center mx-[5%] md:mx-[10%]">
+                    <img src="img/bisa ai.png" alt="bisa ai" class="h-[80px] md:h-[100px] object-contain">
+                    <img src="img/pzn.png" alt="pzn" class="h-[70px] md:h-[90px] object-contain">
+                    <img src="img/udemy.png" alt="udemy" class="h-[60px] md:h-[80px] object-contain">
+                    <img src="img/skilvul.png" alt="skilvul" class="h-[40px] md:h-[50px] object-contain">
+                    <img src="img/dicoding.png" alt="dicoding" class="h-[25px] md:h-[30px] object-contain col-span-2">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portofolio" class="py-[45px] px-6 md:px-[5%]">
+        <h1 class="text-[32px] text-white font-semibold py-[30px] md:py-[45px] flex justify-center items-center animate-fade-in-up">Portofolio</h1>
+        <div class="px-0 md:px-[5%]">
+            <h3 class="text-[#0099FF] text-[20px] md:text-[24px] font-semibold animate-fade-in-up delay-100">Project</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:flex gap-6 justify-center items-center my-[30px] md:my-[45px]">
+                <a href="https://bali-tour-woad.vercel.app/" class="project-card bg-[#D9D9D910] w-full max-w-[300px] h-[225px] rounded-xl p-3 animate-fade-in-up delay-200">
+                    <img src="img/bali.tour.png" class="w-full h-[150px] object-cover rounded-xl" alt="Bali Tour Project">
+                    <div class="flex flex-row gap-4 my-[8px]">
+                        <div class="w-[22px] h-[22px] bg-[#0099FF45] rounded-[6px] flex justify-center items-center">
+                            <img src="img/html.png" class="w-[15px] h-[15px]" alt="HTML">
+                        </div>
+                        <div class="w-[22px] h-[22px] bg-[#0099FF45] rounded-[6px] flex justify-center items-center">
+                            <img src="img/talwind.png" class="w-[15px] h-[15px]" alt="Tailwind">
+                        </div>
+                        <div class="w-[22px] h-[22px] bg-[#0099FF45] rounded-[6px] flex justify-center items-center">
+                            <img src="img/js.png" class="w-[20px] h-[20px]" alt="JavaScript">
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="https://pland-shopp.vercel.app/" class="project-card bg-[#D9D9D910] w-full max-w-[300px] h-[225px] rounded-xl p-3 animate-fade-in-up delay-300">
+                    <img src="img/pland shop.png" class="w-full h-[150px] object-cover rounded-xl" alt="Pland Shop Project">
+                    <div class="flex flex-row gap-4 my-[8px]">
+                        <div class="w-[22px] h-[22px] bg-[#0099FF45] rounded-[6px] flex justify-center items-center">
+                            <img src="img/html.png" class="w-[15px] h-[15px]" alt="HTML">
+                        </div>
+                        <div class="w-[22px] h-[22px] bg-[#0099FF45] rounded-[6px] flex justify-center items-center">
+                            <img src="img/talwind.png" class="w-[15px] h-[15px]" alt="Tailwind">
+                        </div>
+                        <div class="w-[22px] h-[22px] bg-[#0099FF45] rounded-[6px] flex justify-center items-center">
+                            <img src="img/js.png" class="w-[20px] h-[20px]" alt="JavaScript">
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="https://kaia-frozen-food.vercel.app/" class="project-card bg-[#D9D9D910] w-full max-w-[300px] h-[225px] rounded-xl p-3 animate-fade-in-up delay-400">
+                    <img src="img/kaia.png" class="w-full h-[150px] object-cover rounded-xl" alt="Kaia Project">
+                    <div class="flex flex-row gap-4 my-[8px]">
+                        <div class="w-[22px] h-[22px] bg-[#0099FF45] rounded-[6px] flex justify-center items-center">
+                            <img src="img/html.png" class="w-[15px] h-[15px]" alt="HTML">
+                        </div>
+                        <div class="w-[22px] h-[22px] bg-[#0099FF45] rounded-[6px] flex justify-center items-center">
+                            <img src="img/talwind.png" class="w-[15px] h-[15px]" alt="Tailwind">
+                        </div>
+                        <div class="w-[22px] h-[22px] bg-[#0099FF45] rounded-[6px] flex justify-center items-center">
+                            <img src="img/js.png" class="w-[20px] h-[20px]" alt="JavaScript">
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="https://bogor-timur.vercel.app/" class="project-card bg-[#D9D9D910] w-full max-w-[300px] h-[225px] rounded-xl p-3 animate-fade-in-up delay-200">
+                    <img src="img/bogor timur.png" class="w-full h-[150px] object-cover rounded-xl" alt="Bogor Timur Project">
+                    <div class="flex flex-row gap-4 my-[8px]">
+                        <div class="w-[22px] h-[22px] bg-[#0099FF45] rounded-[6px] flex justify-center items-center">
+                            <img src="img/html.png" class="w-[15px] h-[15px]" alt="HTML">
+                        </div>
+                        <div class="w-[22px] h-[22px] bg-[#0099FF45] rounded-[6px] flex justify-center items-center">
+                            <img src="img/css.png" class="w-[15px] h-[15px]" alt="CSS">
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="https://mysmk-azka-rafifs-projects.vercel.app/" class="project-card bg-[#D9D9D910] w-full max-w-[300px] h-[225px] rounded-xl p-3 animate-fade-in-up delay-300">
+                    <img src="img/my smk.png" class="w-full h-[150px] object-cover rounded-xl" alt="My Project">
+                    <div class="flex flex-row gap-4 my-[8px]">
+                        <div class="w-[22px] h-[22px] bg-[#0099FF45] rounded-[6px] flex justify-center items-center">
+                            <img src="img/html.png" class="w-[15px] h-[15px]" alt="HTML">
+                        </div>
+                        <div class="w-[22px] h-[22px] bg-[#0099FF45] rounded-[6px] flex justify-center items-center">
+                            <img src="img/js.png" class="w-[20px] h-[20px]" alt="JavaScript">
+                        </div>
+                        <div class="w-[22px] h-[22px] bg-[#0099FF45] rounded-[6px] flex justify-center items-center">
+                            <img src="img/css.png" class="w-[15px] h-[15px]" alt="CSS">
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <h3 class="text-[#0099FF] text-[20px] md:text-[24px] font-semibold animate-fade-in-up delay-100">Project Design</h3>
+            <h3 class="text-white font-bold text-[18px] md:text-[20px] px-0 md:px-[5%] pt-[30px] md:pt-[45px] animate-fade-in-up delay-200">Dekstop</h3>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center my-[30px] md:my-[45px]">
+                <a href="https://www.figma.com/design/B17r8vjtuiXZS9xFyXADUX/latihan?node-id=335-7151&t=2M2aepjTXw578TvK-1" class="project-card bg-[#D9D9D910] w-full max-w-[300px] h-[225px] rounded-xl p-3 animate-fade-in-up delay-300">
+                    <img src="img/balidesign.png" class="w-full h-[150px] object-cover rounded-xl" alt="Bali Design">
+                    <div class="flex flex-row gap-4 my-[8px]">
+                        <div class="w-[22px] h-[22px] bg-[#0099FF45] rounded-[6px] flex justify-center items-center">
+                            <img src="img/figma.png" class="w-[15px] h-[15px]" alt="Figma">
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="https://www.figma.com/design/B17r8vjtuiXZS9xFyXADUX/latihan?node-id=335-7151&t=2M2aepjTXw578TvK-1" class="project-card bg-[#D9D9D910] w-full max-w-[300px] h-[225px] rounded-xl p-3 animate-fade-in-up delay-400">
+                    <img src="img/balilogin.png" class="w-full h-[150px] object-cover rounded-xl" alt="Bali Login">
+                    <div class="flex flex-row gap-4 my-[8px]">
+                        <div class="w-[22px] h-[22px] bg-[#0099FF45] rounded-[6px] flex justify-center items-center">
+                            <img src="img/figma.png" class="w-[15px] h-[15px]" alt="Figma">
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="https://www.figma.com/design/B17r8vjtuiXZS9xFyXADUX/latihan?node-id=522-85&t=2M2aepjTXw578TvK-1" class="project-card bg-[#D9D9D910] w-full max-w-[300px] h-[225px] rounded-xl p-3 animate-fade-in-up delay-500">
+                    <img src="img/kaiadesign.png" class="w-full h-[150px] object-cover rounded-xl" alt="Kaia Design">
+                    <div class="flex flex-row gap-4 my-[8px]">
+                        <div class="w-[22px] h-[22px] bg-[#0099FF45] rounded-[6px] flex justify-center items-center">
+                            <img src="img/figma.png" class="w-[15px] h-[15px]" alt="Figma">
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="https://www.figma.com/design/cJX9jrcJCNJe5uDnP61Yo8/login?node-id=9103-38&t=hPS5bKvnzOF1IJF2-1" class="project-card bg-[#D9D9D910] w-full max-w-[300px] h-[225px] rounded-xl p-3 animate-fade-in-up delay-300">
+                    <img src="img/login.png" class="w-full h-[150px] object-cover rounded-xl" alt="Login Design">
+                    <div class="flex flex-row gap-4 my-[8px]">
+                        <div class="w-[22px] h-[22px] bg-[#0099FF45] rounded-[6px] flex justify-center items-center">
+                            <img src="img/figma.png" class="w-[15px] h-[15px]" alt="Figma">
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="https://www.figma.com/design/B17r8vjtuiXZS9xFyXADUX/latihan?node-id=356-37&t=2M2aepjTXw578TvK-1" class="project-card bg-[#D9D9D910] w-full max-w-[300px] h-[225px] rounded-xl p-3 animate-fade-in-up delay-400">
+                    <img src="img/smk.png" class="w-full h-[150px] object-cover rounded-xl" alt="SMK Design">
+                    <div class="flex flex-row gap-4 my-[8px]">
+                        <div class="w-[22px] h-[22px] bg-[#0099FF45] rounded-[6px] flex justify-center items-center">
+                            <img src="img/figma.png" class="w-[15px] h-[15px]" alt="Figma">
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <h3 class="text-white font-bold text-[18px] md:text-[20px] px-0 md:px-[5%] pt-[30px] md:pt-[45px] animate-fade-in-up delay-100">Mobile</h3>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center my-[30px] md:my-[45px]">
+                <div href="https://www.figma.com/design/gKe0rV4WlBReIukpzZNOQ5/Untitled?node-id=3-2&t=l47C54neQuac68PT-1" class="project-card bg-[#D9D9D910] w-full max-w-[300px] h-[225px] rounded-xl p-3 animate-fade-in-up delay-200">
+                    <img src="img/loginnn.png" class="w-full h-[150px] object-cover rounded-xl" alt="Mobile Login">
+                    <div class="flex flex-row gap-4 my-[8px]">
+                        <div class="w-[22px] h-[22px] bg-[#0099FF45] rounded-[6px] flex justify-center items-center">
+                            <img src="img/figma.png" class="w-[15px] h-[15px]" alt="Figma">
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="https://www.figma.com/design/qfoLbBFwkzeVmzHCI6BjjI/Untitled?node-id=0-1&t=gvklJlZgQeDsL5nM-1"  class="project-card bg-[#D9D9D910] w-full max-w-[300px] h-[225px] rounded-xl p-3 animate-fade-in-up delay-300">
+                    <img src="img/sribu.png" class="w-full h-[150px] object-cover rounded-xl" alt="Sribu">
+                    <div class="flex flex-row gap-4 my-[8px]">
+                        <div class="w-[22px] h-[22px] bg-[#0099FF45] rounded-[6px] flex justify-center items-center">
+                            <img src="img/figma.png" class="w-[15px] h-[15px]" alt="Figma">
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="https://www.figma.com/design/lkrIpOBG4qHFPLU2lNgQZ7/Untitled?node-id=0-1&t=ErxIPw1OOd0QqeMR-1" class="project-card bg-[#D9D9D910] w-full max-w-[300px] h-[225px] rounded-xl p-3 animate-fade-in-up delay-400">
+                    <img src="img/bukalapak.png" class="w-full h-[150px] object-cover rounded-xl" alt="Bukalapak">
+                    <div class="flex flex-row gap-4 my-[8px]">
+                        <div class="w-[22px] h-[22px] bg-[#0099FF45] rounded-[6px] flex justify-center items-center">
+                            <img src="img/figma.png" class="w-[15px] h-[15px]" alt="Figma">
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="https://www.figma.com/design/uzrjtbeNm6gdMD53pu7kjH/Untitled?node-id=0-1&t=yDpFSbXh0tRWDlWR-1" class="project-card bg-[#D9D9D910] w-full max-w-[300px] h-[225px] rounded-xl p-3 animate-fade-in-up delay-300">
+                    <img src="img/loginn.png" class="w-full h-[150px] object-cover rounded-xl" alt="Login">
+                    <div class="flex flex-row gap-4 my-[8px]">
+                        <div class="w-[22px] h-[22px] bg-[#0099FF45] rounded-[6px] flex justify-center items-center">
+                            <img src="img/figma.png" class="w-[15px] h-[15px]" alt="Figma">
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-[#0099FF] w-full h-auto md:h-[497px]">
+        <div class="relative w-full bg-cover h-full bg-[url('/img/corak.png')] py-[45px]">
+            <div class="flex flex-col justify-center items-center">
+                <h3 class="text-[28px] md:text-[36px] py-[30px] md:py-[45px] font-bold text-white">Azka Rafif Andyra</h3>
+                <p class="text-[20px] md:text-[30px] font-semibold text-[#1e1e1e75] text-center px-4">
+                    pengembang front-end seluler, situs web dan ul & ux design
+                </p>
+                <nav class="py-[30px] md:py-[45px]">
+                    <ul class="flex flex-wrap justify-center gap-4 md:gap-10">
+                        <li><a href="#home" class="text-[15px] text-white font-bold hover:text--[#0099FF] transition-colors duration-300">home</a></li>
+                        <li><a href="#about-me" class="text-[15px] text-white font-bold hover:text--[#0099FF] transition-colors duration-300">about me</a></li>
+                        <li><a href="#skills" class="text-[15px] text-white font-bold hover:text--[#0099FF] transition-colors duration-300">skills</a></li>
+                        <li><a href="#education" class="text-[15px] text-white font-bold hover:text--[#0099FF] transition-colors duration-300">Educations</a></li>
+                        <li><a href="#portofolio" class="text-[15px] text-white font-bold hover:text--[#0099FF] transition-colors duration-300">Portofolio</a></li>
+                </nav>
+                <div id="icon" class="flex gap-6 md:gap-[50px] items-center">
+                    <a href="http://instagram.com/azzted_" class="text-white text-2xl md:text-3xl hover:text--[#0099FF] transition-colors duration-300"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://wa.me/+6285882572778" class="text-white text-2xl md:text-3xl hover:text--[#0099FF] transition-colors duration-300"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="https:/mailto:azkarafif2309@gmail.com" class="text-white text-2xl md:text-3xl hover:text--[#0099FF] transition-colors duration-300"><i class="fa-solid fa-envelope"></i></a>
+                    <a href="https://discordlookup.com/user/dyrazfi" class="text-white text-2xl md:text-3xl hover:text--[#0099FF] transition-colors duration-300"><i class="fa-brands fa-discord"></i></a>
+                </div>
+                <div class="bg-[#1e1e1e75] h-[3px] w-[70%] my-[30px]"></div>
+                <p class="text-white font-semibold text-[15px] text-center px-4">© 2021 Azka Rafif Andyra. All rights reserved</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
