@@ -117,4 +117,4 @@ document.addEventListener('DOMContentLoaded', function() {
         const percent = bar.getAttribute('data-percent');
         bar.style.setProperty('--final-width', `${percent}%`);
     });
-});
+});x
