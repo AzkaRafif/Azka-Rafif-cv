@@ -1,27 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Animasi untuk circular progress
-    const progressCircles = document.querySelectorAll('.progress-fill');
-    
-    progressCircles.forEach(circle => {
-        const percent = parseInt(circle.getAttribute('data-percent'));
-        const radius = percent / 2; // Karena diameter adalah 100%, radius adalah 50%
-        
-        // Sudah di-set via inline style --final-clip
-        // Animasi akan di-trigger oleh CSS animation
-    });
-});
-document.addEventListener('DOMContentLoaded', function() {
-    // Animasi untuk progress bar
-    const progressBars = document.querySelectorAll('.design-progress-bar');
-    
-    progressBars.forEach(bar => {
-        const percent = bar.getAttribute('data-percent');
-        bar.style.setProperty('--final-width', `${percent}%`);
-    });
-});
-
-   // Mobile menu toggle
-   document.querySelector('.hamburger').addEventListener('click', function() {
+document.querySelector('.hamburger').addEventListener('click', function() {
     document.querySelector('.mobile-menu').classList.toggle('active');
     this.querySelector('i').classList.toggle('fa-bars');
     this.querySelector('i').classList.toggle('fa-times');
