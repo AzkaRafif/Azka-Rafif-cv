@@ -20,15 +20,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Mobile menu toggle
-document.addEventListener('DOMContentLoaded', function () {
+ // Mobile menu toggle
+ document.addEventListener('DOMContentLoaded', function () {
     const hamburger = document.querySelector('.hamburger');
     const mobileMenu = document.querySelector('.mobile-menu');
     const menuIcon = hamburger.querySelector('i');
 
     // Toggle mobile menu
     hamburger.addEventListener('click', function () {
-        mobileMenu.classList.toggle('active');
+        mobileMenu.classList.toggle('hidden');
         menuIcon.classList.toggle('fa-bars');
         menuIcon.classList.toggle('fa-times');
     });
@@ -36,13 +36,12 @@ document.addEventListener('DOMContentLoaded', function () {
     // Close mobile menu when clicking on a link
     document.querySelectorAll('.mobile-menu a').forEach(link => {
         link.addEventListener('click', function () {
-            mobileMenu.classList.remove('active');
-            menuIcon.classList.remove('fa-times');
+            mobileMenu.classList.add('hidden');
             menuIcon.classList.add('fa-bars');
+            menuIcon.classList.remove('fa-times');
         });
     });
 });
-
 // Smooth scrolling for all links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
