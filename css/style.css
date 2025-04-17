@@ -508,6 +508,9 @@
   .aspect-square {
     aspect-ratio: 1 / 1;
   }
+  .h-\[1px\] {
+    height: 1px;
+  }
   .h-\[3px\] {
     height: 3px;
   }
@@ -556,6 +559,9 @@
   .h-\[256px\] {
     height: 256px;
   }
+  .h-\[px\] {
+    height: px;
+  }
   .h-auto {
     height: auto;
   }
@@ -574,8 +580,14 @@
   .min-h-screen {
     min-height: 100vh;
   }
+  .w-1 {
+    width: calc(var(--spacing) * 1);
+  }
   .w-1\/2 {
     width: calc(1/2 * 100%);
+  }
+  .w-\[0px\] {
+    width: 0px;
   }
   .w-\[15px\] {
     width: 15px;
@@ -609,6 +621,9 @@
   }
   .w-\[250px\] {
     width: 250px;
+  }
+  .w-\[px\] {
+    width: px;
   }
   .w-full {
     width: 100%;
