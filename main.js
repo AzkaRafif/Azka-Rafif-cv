@@ -20,27 +20,31 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
- // Mobile menu toggle
- document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
+    // Mobile menu toggle
     const hamburger = document.querySelector('.hamburger');
     const mobileMenu = document.querySelector('.mobile-menu');
     const menuIcon = hamburger.querySelector('i');
 
-    // Toggle mobile menu
-    hamburger.addEventListener('click', function () {
-        mobileMenu.classList.toggle('hidden');
-        menuIcon.classList.toggle('fa-bars');
-        menuIcon.classList.toggle('fa-times');
-    });
-
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll('.mobile-menu a').forEach(link => {
-        link.addEventListener('click', function () {
-            mobileMenu.classList.add('hidden');
-            menuIcon.classList.add('fa-bars');
-            menuIcon.classList.remove('fa-times');
+    if (hamburger && mobileMenu && menuIcon) {
+        // Toggle mobile menu
+        hamburger.addEventListener('click', function () {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('active');
+            menuIcon.classList.toggle('fa-bars');
+            menuIcon.classList.toggle('fa-times');
         });
-    });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', function () {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('active');
+                menuIcon.classList.add('fa-bars');
+                menuIcon.classList.remove('fa-times');
+            });
+        });
+    }
 });
 // Smooth scrolling for all links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
