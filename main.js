@@ -1,81 +1,91 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Animasi untuk circular progress
-    const progressCircles = document.querySelectorAll('.progress-fill');
-    
-    progressCircles.forEach(circle => {
-        const percent = parseInt(circle.getAttribute('data-percent'));
-        const radius = percent / 2; // Karena diameter adalah 100%, radius adalah 50%
-        
-        // Sudah di-set via inline style --final-clip
-        // Animasi akan di-trigger oleh CSS animation
-    });
-});
-document.addEventListener('DOMContentLoaded', function() {
-    // Animasi untuk progress bar
-    const progressBars = document.querySelectorAll('.design-progress-bar');
-    
-    progressBars.forEach(bar => {
-        const percent = bar.getAttribute('data-percent');
-        bar.style.setProperty('--final-width', `${percent}%`);
-    });
-});
-
 document.addEventListener('DOMContentLoaded', function () {
     // Mobile menu toggle
-    const hamburger = document.querySelector('.hamburger');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    const menuIcon = hamburger.querySelector('i');
+    const initMobileMenu = () => {
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
 
-    if (hamburger && mobileMenu && menuIcon) {
-        // Toggle mobile menu
-        hamburger.addEventListener('click', function () {
-            mobileMenu.classList.toggle('hidden');
-            mobileMenu.classList.toggle('active');
-            menuIcon.classList.toggle('fa-bars');
-            menuIcon.classList.toggle('fa-times');
-        });
+        if (hamburger && mobileMenu) {
+            const menuIcon = hamburger.querySelector('i');
 
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.mobile-menu a').forEach(link => {
-            link.addEventListener('click', function () {
-                mobileMenu.classList.add('hidden');
-                mobileMenu.classList.remove('active');
-                menuIcon.classList.add('fa-bars');
-                menuIcon.classList.remove('fa-times');
+            hamburger.addEventListener('click', function () {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('active');
+                menuIcon.classList.toggle('fa-bars');
+                menuIcon.classList.toggle('fa-times');
             });
-        });
-    }
-});
-// Smooth scrolling for all links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-        
-        if (targetElement) {
-            window.scrollTo({
-                top: targetElement.offsetTop - 100,
-                behavior: 'smooth'
+
+            document.querySelectorAll('.mobile-menu a').forEach(link => {
+                link.addEventListener('click', function () {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('active');
+                    menuIcon.classList.add('fa-bars');
+                    menuIcon.classList.remove('fa-times');
+                });
             });
         }
-    });
-});
+    };
 
-// Animation for progress bars
-document.addEventListener('DOMContentLoaded', function() {
-    // Animate circular progress
-    const progressCircles = document.querySelectorAll('.progress-fill');
-    progressCircles.forEach(circle => {
-        const percent = circle.getAttribute('data-percent');
-        circle.style.setProperty('--final-clip', `circle(${percent/2}% at 50% 50%)`);
-    });
+    // Smooth scrolling
+    const initSmoothScroll = () => {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
 
-    // Animate bar progress
-    const progressBars = document.querySelectorAll('.design-progress-bar');
-    progressBars.forEach(bar => {
-        const percent = bar.getAttribute('data-percent');
-        bar.style.setProperty('--final-width', `${percent}%`);
-    });
+                if (targetElement) {
+                    const offsetTop = targetElement.getBoundingClientRect().top + window.scrollY - 100;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    };
+
+    // Progress animations
+    const initProgressAnimations = () => {
+        document.querySelectorAll('.progress-fill').forEach(circle => {
+            const percent = circle.dataset.percent;
+            circle.style.setProperty('--final-clip', `circle(${percent / 2}% at 50% 50%)`);
+        });
+
+        document.querySelectorAll('.design-progress-bar').forEach(bar => {
+            const percent = bar.dataset.percent;
+            bar.style.setProperty('--final-width', `${percent}%`);
+        });
+    };
+
+    // Scroll animations with IntersectionObserver
+    const initScrollAnimations = () => {
+        const animatedElements = document.querySelectorAll(
+            '.animate-fade-in-up, .animate-element'
+        );
+
+        const observer = new IntersectionObserver(
+            (entries, observer) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            }
+        );
+
+        animatedElements.forEach((element) => {
+            observer.observe(element);
+        });
+    };
+
+    // Initialize all functions Initialize all functions
+    initMobileMenu();  initMobileMenu();
+    initSmoothScroll();
+    initProgressAnimations();tions();
+    initScrollAnimations();s();
 });
